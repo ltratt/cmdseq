@@ -20,7 +20,7 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-# runevery [-d <count dir>] <count1> <cmd1> [... <countn> <cmdn>]
+# cmdseq [-d <count dir>] <count1> <cmd1> [... <countn> <cmdn>]
 # Every time this utility is called it executes one of cmd1 ... cmdn. It
 # selects the command by remembering how many times this particular sequence
 # of commands has been called. First, cmd1 is executed countn times; cmd2 (if it
@@ -53,7 +53,7 @@ fi
 
 
 usage() {
-    echo "Usage: runevery [-d <count dir>] <count1> <cmd1> [... <countn> <cmdn>]" >&2
+    echo "Usage: cmdseq [-d <count dir>] <count1> <cmd1> [... <countn> <cmdn>]" >&2
     exit 1
 }
 
@@ -97,7 +97,7 @@ while [ i -lt $numcmds ]; do
     concat="$concat${counts[i]}${cmds[i]}"
     i=$((i + 1))
 done
-countp=/var/tmp/runevery.`echo $concat | $hash_cmd | cut -c 1-16`
+countp=/var/tmp/cmdseq.`echo $concat | $hash_cmd | cut -c 1-16`
 if [ ! -f $countp ]; then
     cur=0
 else
