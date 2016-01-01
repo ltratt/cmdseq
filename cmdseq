@@ -97,7 +97,7 @@ while [ i -lt $numcmds ]; do
     concat="$concat${counts[i]}${cmds[i]}"
     i=$((i + 1))
 done
-countp=/var/tmp/cmdseq.`echo $concat | $hash_cmd | cut -c 1-16`
+countp=${countdir}/cmdseq.`echo $concat | $hash_cmd | cut -c 1-16`
 if [ ! -f $countp ]; then
     cur=0
 else
