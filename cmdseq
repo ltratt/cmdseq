@@ -126,5 +126,6 @@ while [ i -lt $numcmds ]; do
     i=$((i + 1))
 done
 
+umask 077 # The count file will only be r/w by the user executing cmdseq
 echo $cur > $countp
 exit $ec
