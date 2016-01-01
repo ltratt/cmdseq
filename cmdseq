@@ -57,7 +57,7 @@ usage() {
     exit 1
 }
 
-countdir="/var/tmp/"
+countdir="/tmp/"
 while getopts ":hd:" f
 do
     case "$f" in
