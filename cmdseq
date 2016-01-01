@@ -71,63 +71,59 @@ do
 done
 
 # Since commands come in (count, cmd) pairs, they must be an even number
+
 shift $((OPTIND-1))
 if [ $(($# % 2)) -ne 0 ]; then
     usage
 fi
 
-numcmds=$(($# / 2))
-counttotal=0
-cmdi=0
-while [ $# -gt 0 ]; do 
-    counts[$cmdi]=`expr $1`
-    if [ $? -gt 1 ]; then
-        usage
-    fi
-    cmds[$cmdi]=$2
-    counttotal=$((counttotal + ${counts[cmdi]}))
-    cmdi=$((cmdi + 1))
-    shift
-    shift
-done
+# There must be at least one (count, cmd) pair
 
+if [ $# -eq 0 ]; then
+    usage
+fi
 
 # Work out where the count file is (or should be)
 
-concat=""
-i=0
-while [ $i -lt $numcmds ]; do
-    concat="$concat${counts[i]}${cmds[i]}"
-    i=$((i + 1))
-done
-countp=${countdir}/cmdseq.`echo $concat | $hash_cmd | cut -c 1-16`
+countp=${countdir}/cmdseq.`echo $@ | $hash_cmd | cut -c 1-16`
 if [ ! -f $countp ]; then
     cur=0
 else
     cur=$((`head -n 1 $countp` + 1))
 fi
 
-if [ $cur -ge $counttotal ]; then
-    # We've wrapped
-    cur=0
-fi
-
-
 # Execute the appropriate command
 
-i=0
+firstcmd=$2
 count=0
-ec=0
-while [ $i -lt $numcmds ]; do
-    nextcount=$((count + ${counts[i]}))
+while [ $# -gt 0 ]; do 
+    c=`expr $1`
+    if [ $? -gt 1 ]; then
+        echo "Invalid count '$1'" >&2
+        exit 1
+    fi
+    if [ $c -lt 1 ]; then
+        echo "Invalid count '$1'" >&2
+        exit 1
+    fi
+    nextcount=$((count + c))
     if [ $cur -lt $nextcount ]; then
-        ${cmds[i]}
-        ec=$?
+        cmd=$2
         break
     fi
     count=$nextcount
-    i=$((i + 1))
+    shift
+    shift
 done
+
+# If we ran past the end, then we need to wrap back to the beginning
+if [ $# -eq 0 ]; then
+    cmd=$firstcmd
+    cur=0
+fi
+
+$cmd
+ec=$?
 
 umask 077 # The count file will only be r/w by the user executing cmdseq
 echo $cur > $countp
