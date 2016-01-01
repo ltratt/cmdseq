@@ -81,10 +81,10 @@ while [ $# -gt 0 ]; do
     if [ $? -gt 1 ]; then
         usage
     fi
-	cmds[cmdi]=$2
+    cmds[cmdi]=$2
     counttotal=$((counttotal + ${counts[cmdi]}))
     cmdi=$((cmdi + 1))
-	shift
+    shift
     shift
 done
 
