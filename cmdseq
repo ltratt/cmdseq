@@ -80,11 +80,11 @@ numcmds=$(($# / 2))
 counttotal=0
 cmdi=0
 while [ $# -gt 0 ]; do 
-    counts[cmdi]=`expr $1`
+    counts[$cmdi]=`expr $1`
     if [ $? -gt 1 ]; then
         usage
     fi
-    cmds[cmdi]=$2
+    cmds[$cmdi]=$2
     counttotal=$((counttotal + ${counts[cmdi]}))
     cmdi=$((cmdi + 1))
     shift
@@ -96,7 +96,7 @@ done
 
 concat=""
 i=0
-while [ i -lt $numcmds ]; do
+while [ $i -lt $numcmds ]; do
     concat="$concat${counts[i]}${cmds[i]}"
     i=$((i + 1))
 done
@@ -118,7 +118,7 @@ fi
 i=0
 count=0
 ec=0
-while [ i -lt $numcmds ]; do
+while [ $i -lt $numcmds ]; do
     nextcount=$((count + ${counts[i]}))
     if [ $cur -lt $nextcount ]; then
         ${cmds[i]}
