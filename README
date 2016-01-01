@@ -1,0 +1,22 @@
+================================================================================
+  cmdseq
+================================================================================
+
+  Usage: cmdseq [-d <count dir>] <count1> <cmd1> [... <countn> <cmdn>]
+
+cmdseq allows users to execute interleaved sequences of commands. Assuming the
+same counts and commands, on each execution cmdseq executes one of the commands,
+cycling through the sequence. For example, consider the following sequence:
+
+  $ cmdseq 2 "echo cmd1" 1 "echo cmd2"
+  cmd1
+  $ cmdseq 2 "echo cmd1" 1 "echo cmd2"
+  cmd1
+  $ cmdseq 2 "echo cmd1" 1 "echo cmd2"
+  cmd2
+  $ cmdseq 2 "echo cmd1" 1 "echo cmd2"
+  cmd 1
+
+More information about cmdseq can be found at its webpage:
+
+  http://tratt.net/laurie/src/cmdseq/
