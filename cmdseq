@@ -20,7 +20,10 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-# cmdseq [-d <count dir>] <count1> <cmd1> [... <countn> <cmdn>]
+# cmdseq http://tratt.net/laurie/src/cmdseq/
+#
+# Usage: cmdseq [-d <count dir>] <count1> <cmd1> [... <countn> <cmdn>]
+#
 # Every time this utility is called it executes one of cmd1 ... cmdn. It
 # selects the command by remembering how many times this particular sequence
 # of commands has been called. First, cmd1 is executed countn times; cmd2 (if it
