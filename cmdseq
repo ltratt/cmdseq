@@ -96,7 +96,7 @@ fi
 
 firstcmd=$2
 count=0
-while [ $# -gt 0 ]; do 
+while [ $# -gt 0 ]; do
     c=`expr $1`
     if [ $? -gt 1 ]; then
         echo "Invalid count '$1'" >&2
