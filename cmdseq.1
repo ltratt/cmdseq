@@ -1,0 +1,55 @@
+.Dd $Mdocdate: December 19 2021 $
+.Dt CMDSEQ 1
+.Os
+.Sh NAME
+.Nm cmdseq
+.Nd Execute interleaved sequences of commands
+.Sh SYNOPSIS
+.Nm cmdseq
+.Op Fl d Ar count_dir
+.Ar count_1 cmd_1
+.Op Ar ... count_n cmd_n
+.Sh DESCRIPTION
+.Nm
+executes interleaved sequences of commands.
+For a given sequence of counts and commands, each execution of
+.Nm
+executes one of the commands, cycling through the sequence and wrapping back to
+the beginning when it is complete.
+.Pp
+The options are as follows:
+.Bl -tag -width Ds
+.It Fl d Ar count_dir
+specifies where
+.Nm
+stores its cookie file.
+Defaults to
+.Pa /tmp/
+.It Ar count cmd
+Specifies that the positive non-zero integer
+.Em count
+iterations of
+.Em cmd
+should be executed before moving to the next command in the sequence.
+.El
+.Pp
+.Nm
+exits with the exit code of whichever
+.Em cmd
+it ran.
+.Sh EXAMPLES
+.Bd -literal -offset 4n
+$ cmdseq 2 "echo cmd1" 1 "echo cmd2"
+cmd1
+$ cmdseq 2 "echo cmd1" 1 "echo cmd2"
+cmd1
+$ cmdseq 2 "echo cmd1" 1 "echo cmd2"
+cmd2
+$ cmdseq 2 "echo cmd1" 1 "echo cmd2"
+cmd1
+.Ed
+.Sh AUTHORS
+.An -nosplit
+.Nm
+was written by
+.An Laurence Tratt Aq https://tratt.net/laurie/
