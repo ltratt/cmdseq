@@ -20,7 +20,7 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-# cmdseq http://tratt.net/laurie/src/cmdseq/
+# cmdseq https://tratt.net/laurie/src/cmdseq/
 #
 # Usage: cmdseq [-d <count dir>] <count1> <cmd1> [... <countn> <cmdn>]
 #
