@@ -19,6 +19,6 @@ clean:
 distrib:
 	@read v?'cmdseq version: '; mkdir cmdseq-$$v; \
 	cp cmdseq cmdseq.1 cmdseq-$$v; \
-	  cp Makefile.cmdseq cmdseq-$$v/Makefile; \
-	  tar cfz cmdseq-$$v.tar.gz cmdseq-$$v; \
+	  cp Makefile cmdseq-$$v/Makefile; \
+	  tar cfz cmdseq-$$v.tgz cmdseq-$$v; \
 	  rm -rf cmdseq-$$v
